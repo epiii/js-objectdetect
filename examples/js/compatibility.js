@@ -5,9 +5,7 @@
  */
 var compatibility = (function() {
 	var lastTime = 0,
-	
 		URL = window.URL || window.webkitURL,
-	
 		requestAnimationFrame = function(callback, element) {
 			var requestAnimationFrame =
 				window.requestAnimationFrame		|| 
@@ -32,6 +30,7 @@ var compatibility = (function() {
 				window.navigator.getUserMedia ||
 				window.navigator.mozGetUserMedia ||
 				window.navigator.webkitGetUserMedia ||
+				
 				function(options, success, error) {
 					error();
 				};

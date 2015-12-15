@@ -5,7 +5,7 @@
  * Copyright (c) 2012, Martin Tschirsich
  */
 var objectdetect = (function() {
-	"use strict";
+	"use strict"; // pengaktifan rule javascript 
     	
     var /**
 		 * Converts from a 4-channel RGBA source image to a 1-channel grayscale
@@ -17,6 +17,7 @@ var objectdetect = (function() {
 		 * @return {Array} 1-channel 32-bit destination image
 		 */
 		convertRgbaToGrayscale = function(src, dst) {
+			// console.log('source ='+src+' ,'+' dest='+dst);return false;
 			var srcLength = src.length;
 			if (!dst) dst = new Uint32Array(srcLength >> 2);
 			
@@ -61,6 +62,7 @@ var objectdetect = (function() {
 					++dstIndex;
 				}
 			}
+			// console.log('size = '+typeof dst);
 			return dst;
 		},
 		
