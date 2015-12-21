@@ -7,6 +7,7 @@
 	<meta charset="utf-8">
 	<title>Pilih Klambi Bos</title>
 	
+	<script src="js/main.js"></script>
 	<script src="js/compatibility.js"></script>
 	<script src="js/smoother.js"></script>
 	
@@ -17,7 +18,7 @@
 	-->
 	
 	<script>
-	window.onload = function() {
+	/*window.onload = function() {
 		// cek compatibility with browser
 		var smoother = new Smoother([0.9999999, 0.9999999, 0.999, 0.999], [0, 0, 0, 0]),
 			video = document.getElementById('video'),
@@ -95,7 +96,7 @@
 			}, false);
 		});
 		// console.log(resrescaleImage());
-	};
+	};*/
     </script>
 </head>
 
