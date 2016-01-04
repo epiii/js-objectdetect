@@ -34,7 +34,13 @@ window.onload = function() {
 
 		if (video.readyState === video.HAVE_ENOUGH_DATA && video.videoWidth > 0) {
           	// Prepare the detector once the video dimensions are known:
+			console.log('READY STATE!');
           	if (!detector) {
+				console.log('masuk ! video');
+				console.log('w='+video.videoWidth);
+				console.log('h='+video.videoHeight);
+	      		// var width = ~~(185 * video.videoWidth / video.videoHeight);
+				// var height  =185;
 	      		var width = ~~(60 * video.videoWidth / video.videoHeight);
 				var height  =60;
 	      		// detector = new objectdetect.detector(width, height, 1.1, objectdetect.upperbody);
@@ -42,7 +48,7 @@ window.onload = function() {
 	      	}
       		
       		// Perform the actual detection:
-			var coords = detector.detect(video, 1);
+			var coords = detector.detect(video, 1); //objectdetect.js line 684
 			if (coords[0]) {
 				var coord = coords[0];
 				coord = smoother.smooth(coord);
