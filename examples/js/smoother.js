@@ -21,7 +21,7 @@ var Smoother = function(alphas, initialValues, lookAhead) {
 		numValues = initialValues.length,
 		lookAhead = (typeof lookAhead !== 'undefined') ? lookAhead : 1.0;
 
-	this.smooth = function(values) {
+	this.smooth = function(values) { //values => data_type : array 
 		var smoothedValues = [];
 		
 		// time in seconds since last update:

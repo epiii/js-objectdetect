@@ -92,12 +92,14 @@
 					// Draw coordinates on video overlay:
 					context.beginPath();
 					context.lineWidth = '2';
-					context.fillStyle = fist_pos_old ? 'rgba(0, 255, 255, 0.5)' : 'rgba(255, 0, 0, 0.5)';
+					context.fillStyle = fist_pos_old ? 'rgba(0, 246, 238, 0.5)' : 'rgba(255, 0, 0, 0.5)';
+					// context.fillStyle = fist_pos_old ? 'rgba(0, 255, 255, 0.5)' : 'rgba(255, 0, 0, 0.5)';
 					context.fillRect(
-						coord[0] / video.videoWidth * canvas.clientWidth,
-						coord[1] / video.videoHeight * canvas.clientHeight,
-						coord[2] / video.videoWidth * canvas.clientWidth,
-						coord[3] / video.videoHeight * canvas.clientHeight);
+						coord[0] / video.videoWidth * canvas.clientWidth, 	// x
+						coord[1] / video.videoHeight * canvas.clientHeight,	// y
+						coord[2] / video.videoWidth * canvas.clientWidth,	// width
+						coord[3] / video.videoHeight * canvas.clientHeight	// height
+					);
 					context.stroke();
 				} else fist_pos_old = null;
 			}

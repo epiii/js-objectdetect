@@ -655,6 +655,8 @@ var objectdetect = (function() {
 		 */
 		function detector(width, height, scaleFactor, classifier) {
 			this.canvas = document.createElement('canvas');
+			// this.canvas.width  = 1024;
+			// this.canvas.height = 720;
 			this.canvas.width = width;
 			this.canvas.height = height;
 			this.context = this.canvas.getContext('2d');

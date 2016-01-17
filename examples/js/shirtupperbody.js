@@ -1,6 +1,5 @@
 window.onload = function() {
 
-
 	listProduct();
 	// cek compatibility with browser
 	var smoother = new Smoother([0.9999999, 0.9999999, 0.999, 0.999], [0, 0, 0, 0]),
@@ -8,6 +7,7 @@ window.onload = function() {
 		shirt = document.getElementById('shirt'),
 		detector;
 		// console.log(compatibility.URL.createObjectURL(stream)); return false;	
+		// console.log('ini'+detector); return false;
 	try {
 		compatibility.getUserMedia({video: true}, function(stream) {
 				try {
@@ -26,10 +26,10 @@ window.onload = function() {
 	}
 	
 	var buttonx = function  (par) {
-		alert('draw button');
+		// alert('draw button');
 	    // fillRectangle(x, y, width, height);
-	    video.fillRect(x, y, 50, 50);
-	    video.fillStyle = "#ff0000";
+	    // video.fillRect(x, y, 50, 50);
+	    // video.fillStyle = "#ff0000";
 	}
 
 	function preparation () {
@@ -43,43 +43,44 @@ window.onload = function() {
 		// compatibility.requestAnimationFrame(play);
 		var x = compatibility.requestAnimationFrame(playx); // play video streaming 
 		// var x = compatibility.requestAnimationFrame(play); // play video streaming 
-		console.log(x); // counter play video streaming 
+	// console.log(x); // counter play video streaming 
 		// return false;
 		
 		// compatibility.requestAnimationFrame(play);
 		if (video.paused) { // play streaming video
-			console.log('masuk play video streaming');
+			// console.log('masuk play video streaming');
 			video.play();
 		}
 
-		if (video.readyState === video.HAVE_ENOUGH_DATA && video.videoWidth > 0) {
+		if (video.readyState === video.HAVE_ENOUGH_DATA && video.videoWidth > 0) {  // jika webcam berhasil mengcapture gambar real time user dan dimuat ke dala video 
           	// Prepare the detector once the video dimensions are known:
-			console.log('READY STATE!');
+			// console.log('READY STATE!');
           	if (!detector) {
-				console.log('masuk ! video');
-				console.log('w='+video.videoWidth);
-				console.log('h='+video.videoHeight);
-	      		// var width = ~~(185 * video.videoWidth / video.videoHeight);
-				// var height  =185;
-	      		var width = ~~(60 * video.videoWidth / video.videoHeight);
-				var height  =60;
-	      		// detector = new objectdetect.detector(width, height, 1.1, objectdetect.handopen);
+			// console.log('masuk ! video');
+			// console.log('w='+video.videoWidth);
+			// console.log('h='+video.videoHeight);
+				var width  = ~~(60 * video.videoWidth / video.videoHeight);
+				var height = 60;
+					// var width  = ~~(90 * video.videoWidth / video.videoHeight);
+					// var height = 90;
+					// detector   = new objectdetect.detector(width, height, 1.1, objectdetect.handopen);
 	      		detector = new objectdetect.detector(width, height, 1.1, objectdetect.frontalface_alt);
+	      		// detector = new objectdetect.detector(1024, 720, 1.1, objectdetect.frontalface_alt);
 	      	}
       		
       		// Perform the actual detection:
-			var coords = detector.detect(video, 1); //objectdetect.js line 684
-			console.log(coords[0]);
+			var coords = detector.detect(video, 1); // objectdetect.js line 684
+			console.log(typeof (coords[0])); 		// object
+			console.log(coords[0]);		 			// [45.09428000000002, 20.93663000000001, 32.210200000000015, 32.210200000000015, 1]
  			
- 			// [45.09428000000002, 20.93663000000001, 32.210200000000015, 32.210200000000015, 1]
  			if (coords[0]) {
 				var coord = coords[0];
-				coord = smoother.smooth(coord);
+				coord     = smoother.smooth(coord);
 				
-				console.log('vid width ='+video.videoWidth);
-				console.log('vid height ='+video.videoHeight);
-				console.log('cvs width ='+detector.canvas.width);
-				console.log('cvs height ='+detector.canvas.height);
+				// console.log('vid width ='+video.videoWidth);
+				// console.log('vid height ='+video.videoHeight);
+				// console.log('cvs width ='+detector.canvas.width);
+				// console.log('cvs height ='+detector.canvas.height);
 
 			// Rescale coordinates from detector to video coordinate space:
 				coord[0] *= video.videoWidth / detector.canvas.width;
@@ -97,10 +98,10 @@ window.onload = function() {
 				// coord[2] *= video.videoWidth / detector.canvas.width;
 				// 	coord[3] *= video.videoHeight / detector.canvas.height;
 			
-				console.log('kor 0 ='+coord[0]);
-				console.log('kor 1 ='+coord[1]);
-				console.log('kor 2 ='+coord[2]);
-				console.log('kor 3 ='+coord[3]);
+				// console.log('kor 0 ='+coord[0]);
+				// console.log('kor 1 ='+coord[1]);
+				// console.log('kor 2 ='+coord[2]);
+				// console.log('kor 3 ='+coord[3]);
 
 				// Display shirt overlay: 
 				shirt.style.left    = ~~(coord[0] + coord[2] * 2.5) + 'px';
@@ -112,10 +113,30 @@ window.onload = function() {
 				// shirt.style.width   = ~~(coord[2] * 6/8) + 'px';
 				// shirt.style.height  = ~~(coord[3] * 6/8) + 'px';
 				shirt.style.opacity = 1;
-				
+				console.log('gambar terus');
+					// Draw coordinates on video overlay:
+					detector.context.beginPath();
+					detector.context.lineWidth = '2';
+					// detector.context.fillStyle = 'red';
+					detector.context.fillStyle = 'rgba(0, 246, 238, 0.5)';
+					// detector.context.fillStyle = fist_pos_old ? 'rgba(0, 246, 238, 0.5)' : 'rgba(255, 0, 0, 0.5)';
+					// detector.context.fillStyle = fist_pos_old ? 'rgba(0, 255, 255, 0.5)' : 'rgba(255, 0, 0, 0.5)';
+					detector.context.fillRect(
+						coord[0] / video.videoWidth * 100,	//* canvas.clientWidth, 	// x
+						coord[1] / video.videoHeight * 100 ,	//* canvas.clientHeight,	// y
+						coord[2] / video.videoWidth * 100 ,	//* canvas.clientWidth,	// width
+						coord[3] / video.videoHeight * 100	//* canvas.clientHeight	// height
+						// coord[0] / video.videoWidth ,	//* canvas.clientWidth, 	// x
+						// coord[1] / video.videoHeight ,	//* canvas.clientHeight,	// y
+						// coord[2] / video.videoWidth ,	//* canvas.clientWidth,	// width
+						// coord[3] / video.videoHeight 	//* canvas.clientHeight	// height
+					);
+					detector.context.stroke();
+					// console.log(detector.context.beginPath());
+
 			} else { 
-				var opacity = shirt.style.opacity - 0.2;
-				shirt.style.opacity = opacity > 0 ? opacity : 0;
+				// var opacity = shirt.style.opacity - 0.2;
+				// shirt.style.opacity = opacity > 0 ? opacity : 0;
 			}
 		}
 	}
