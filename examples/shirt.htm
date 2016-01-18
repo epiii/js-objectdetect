@@ -8,7 +8,10 @@
 	<script src="js/smoother.js"></script>
 	
 	<script src="../js/objectdetect.js"></script>
+	<!--
 	<script src="../js/objectdetect.frontalface_alt.js"></script>
+	-->
+	<script src="../js/objectdetect.upperbody.js"></script>
 	
 	<script>
 	window.onload = function() {
@@ -50,7 +53,9 @@
 	          	if (!detector) {
 		      		var width = ~~(60 * video.videoWidth / video.videoHeight);
 					var height  =60;
-		      		detector = new objectdetect.detector(width, height, 1.1, objectdetect.frontalface_alt);
+		      		detector = new objectdetect.detector(width, height, 1.1, objectdetect.upperbody);
+		      		// detector = new objectdetect.detector(width, height, 1.1, objectdetect.upperbody);
+		      		// detector = new objectdetect.detector(width, height, 1.1, objectdetect.frontalface_alt);
 		      	}
           		
           		// Perform the actual detection:

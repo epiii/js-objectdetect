@@ -7,20 +7,20 @@
 	<meta charset="utf-8">
 	<title>Pilih Klambi Bos</title>
 	
+	<!--
+	<script src="../js/objectdetect.frontalface_alt.js">  </script>
+	-->
 	<script src="js/compatibility.js"></script>
 	<script src="js/smoother.js"></script>
-	
-	<script src="../js/objectdetect.js"></script>
-	<!--
-	<script src="../js/objectdetect.handopen.js">  </script> 
-	-->
-	<script src="js/shirtupperbody.js"></script>
-	<script src="../js/objectdetect.frontalface_alt.js">  </script>
 
+	<script src="js/js-objectdetect/objectdetect.js"></script>
+	<script src="js/js-objectdetect/objectdetect.upperbody.js">  </script> 
+	<script src="js/shirtupperbody.js"></script>
+
+	<script src="js/jquery.js"></script>
 	<!--
 	<script src="js/shirtfrontalface.js"></script>
 	-->
-	<script src="js/jquery.js"></script>
 	
 	<!--
 	<script src="../js/objectdetect.upperbody.js"></script>
@@ -33,6 +33,8 @@
 <body xonload="listProduct();">
 	<h1>tes</h1>
 	<video id="video" style="float: right; margin-right: 1em;"></video>
+	<button id="fullscreenbtn"> X </button>
+	<!-- <video id="video2" style="float: left; margin-right: 1em;"></video> -->
 <!-- 	<svg width="400" height="180">
 	  <rect x="50" y="20" rx="20" ry="20" width="150" height="150"
 	  style="fill:red;stroke:black;stroke-width:5;opacity:0.5" />
