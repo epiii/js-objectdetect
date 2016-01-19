@@ -1,6 +1,6 @@
 window.onload = function() {
-	var detectLib = objectdetect.upperbody;
-	// var detectLib = objectdetect.frontalface_alt;
+	// var detectLib = objectdetect.upperbody;
+	var detectLib = objectdetect.frontalface_alt;
 	listProduct();
 	// cek compatibility with browser
 	var smoother = new Smoother([0.9999999, 0.9999999, 0.999, 0.999], [0, 0, 0, 0]),
@@ -75,93 +75,38 @@ window.onload = function() {
  			if (coords[0]) {
 				var coord = coords[0];
 				coord     = smoother.smooth(coord);
-				
-				// // Display shirt overlay: 
-				// shirt.style.left    = ~~(coord[0] + coord[2] * 2.5) + 'px';
-				// shirt.style.top     = ~~(coord[1] + coord[3] * 1.5 ) + 'px';
-				// shirt.style.width   = ~~(coord[2] * 6/1.5) + 'px';
-				// shirt.style.height  = ~~(coord[3] * 6/1.5) + 'px';
+				// Rescale coordinates from detector to video coordinate space:
+					// coord[0] *= video.videoWidth / detector.canvas.width;
+					// coord[1] *= (video.videoHeight / detector.canvas.height)+3;
+					// coord[2] *= (video.videoWidth / detector.canvas.width)+1.5;
+					// coord[3] *= (video.videoHeight / detector.canvas.height);
 
-				// shirt.style.opacity = 1;
-				
-				/*console.log('gambar terus');
-					// Draw coordinates on video overlay:
-					detector.context.beginPath();
-					detector.context.lineWidth = '2';
-					// detector.context.fillStyle = 'red';
-					detector.context.fillStyle = 'rgba(0, 246, 238, 0.5)';
-					// detector.context.fillStyle = fist_pos_old ? 'rgba(0, 246, 238, 0.5)' : 'rgba(255, 0, 0, 0.5)';
-					// detector.context.fillStyle = fist_pos_old ? 'rgba(0, 255, 255, 0.5)' : 'rgba(255, 0, 0, 0.5)';
-					detector.context.fillRect(
-						coord[0] / video.videoWidth * 100,	//* canvas.clientWidth, 	// x
-						coord[1] / video.videoHeight * 100 ,	//* canvas.clientHeight,	// y
-						coord[2] / video.videoWidth * 100 ,	//* canvas.clientWidth,	// width
-						coord[3] / video.videoHeight * 100	//* canvas.clientHeight	// height
-					);*/
-
-					// old scaling --
-					// Rescale coordinates from detector to video coordinate space:
 					coord[0] *= video.videoWidth / detector.canvas.width;
-						console.log('c[0]='+coord[0]);
-						console.log('l vid='+video.videoWidth);
-						console.log('l can='+detector.canvas.width);
-					coord[1] *= video.videoHeight / detector.canvas.height;
+						coord[1] *= video.videoHeight / detector.canvas.height;
 					coord[2] *= video.videoWidth / detector.canvas.width;
-					coord[3] *= video.videoHeight / detector.canvas.height;
+						coord[3] *= video.videoHeight / detector.canvas.height;
+				
+					console.log('kor 0 ='+coord[0]);
+					console.log('kor 1 ='+coord[1]);
+					console.log('kor 2 ='+coord[2]);
+					console.log('kor 3 ='+coord[3]);
 
 					// Display shirt overlay: 
-					shirt.style.left    = ~~(coord[0] + coord[2] * 1.0/8 + video.offsetLeft) + 'px';
-					shirt.style.top     = ~~(coord[1] + coord[3] * 0.8/8 + video.offsetTop) + 'px';
-					shirt.style.width   = ~~(coord[2] * 6/8) + 'px';
-					shirt.style.height  = ~~(coord[3] * 6/8) + 'px';
-
-						console.log('s left='+shirt.style.left);
-						console.log('s top='+shirt.style.top);
-						console.log('s width='+shirt.style.width);
-						console.log('s height='+shirt.style.height);
-
+					// shirt.style.left    = ~~(coord[0] + coord[2] * 2.5) + 'px';
+					// shirt.style.top     = ~~(coord[1] + coord[3] * 1.5 ) + 'px';
+					// shirt.style.width   = ~~(coord[2] * 6/1.5) + 'px';
+					// shirt.style.height  = ~~(coord[3] * 6/1.5) + 'px';
+					
+					// shirt.style.left    = ~~(coord[0] + coord[2] * 1.0/8 + video.offsetLeft) + 'px';
+					// shirt.style.top     = ~~(coord[1] + coord[3] * 0.8/8 + video.offsetTop) + 'px';
+					// shirt.style.width   = ~~(coord[2] * 6/8) + 'px';
+					// shirt.style.height  = ~~(coord[3] * 6/8) + 'px';
+					shirt.style.left    = ~~((coord[0]*0.0005) + video.offsetLeft) + 'px';
+					shirt.style.top     = ~~(coord[1] * 0.5 + video.offsetTop) + 'px';
+					shirt.style.width   = ~~((coord[2] * 6/8)*4) + 'px';
+					shirt.style.height  = ~~((coord[3] * 6/8)*4) + 'px';
 					shirt.style.opacity = 1;
 
-
-					// path and polygon
-					// var c2 = canvas.getContext('2d');
-					
-					/*var canvas2 = document.createElement('canvas');
-					canvas2.width  = 30;
-					canvas2.height = 30;
-					canvas2.context= canvas2.getContext('2d');
-
-					canvas2.fillStyle = '#f00';
-					canvas2.beginPath();
-					canvas2.moveTo(0, 0);
-					canvas2.lineTo(100,50);
-					canvas2.lineTo(50, 100);
-					canvas2.lineTo(0, 90);
-					canvas2.closePath();
-					canvas2.fill();
-
-					//poly [x,y, x,y, x,y.....];
-					var poly=[ 5,5, 100,50, 50,100, 10,90 ];
-					var canvas=document.getElementById("canvas")
-					var ctx = canvas.getContext('2d');
-					ctx.fillStyle = '#f00';
-
-					ctx.beginPath();
-					ctx.moveTo(poly[0], poly[1]);
-					for( item=2 ; item < poly.length-1 ; item+=2 ){
-						ctx.lineTo( poly[item] , poly[item+1] )
-					}
-
-					ctx.closePath();
-					ctx.fill(); */
-
-					// alert('tes');					
-					// mirroring (flip horizontal)
-						// shirt.style.cssText = "-moz-transform: scale(-1, 1); \
-						// -webkit-transform: scale(-1, 1); -o-transform: scale(-1, 1); \
-						// transform: scale(-1, 1); filter: FlipH;";
-					// end of old scaling --
-					// detector.context.stroke();
 			} else { 
 				var opacity = shirt.style.opacity - 0.2;
 				shirt.style.opacity = opacity > 0 ? opacity : 0;

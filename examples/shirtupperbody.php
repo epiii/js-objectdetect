@@ -5,16 +5,16 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Pilih Klambi Bos</title>
+	<title>Pilih Baju</title>
 	
-	<!--
-	<script src="../js/objectdetect.frontalface_alt.js">  </script>
-	-->
 	<script src="js/compatibility.js"></script>
 	<script src="js/smoother.js"></script>
 
 	<script src="js/js-objectdetect/objectdetect.js"></script>
 	<script src="js/js-objectdetect/objectdetect.upperbody.js">  </script> 
+	<!--
+	<script src="../js/objectdetect.frontalface_alt.js">  </script>
+	-->
 	<script src="js/shirtupperbody.js"></script>
 
 	<script src="js/jquery.js"></script>
@@ -31,8 +31,8 @@
 
 <!-- <body onload="listProduct();"> -->
 <body xonload="listProduct();">
-	<h1>tes</h1>
-	<video id="video" style="float: right; margin-right: 1em;"></video>
+	<!-- <video id="video" style="float: right; margin-right: 1em;"></video> -->
+	<video id="video" style="float: left; margin-right: 1em;"></video>
 	<button id="fullscreenbtn"> X </button>
 	<!-- <video id="video2" style="float: left; margin-right: 1em;"></video> -->
 <!-- 	<svg width="400" height="180">
@@ -61,7 +61,7 @@
 		<img src="img/s008.png" style="width: 117px;"> -->
 	</div>
 	
-	<img id="shirt" src="img/s001.png" style="position: absolute; display:block;">
+	<img id="shirt" src="img/img2/s001.png" style="position: absolute; display:block;">
 	<!-- <img id="shirt" src="img/s001.png" style="position: absolute; display: block; opacity: 1"> -->
 </body>
 </html>
