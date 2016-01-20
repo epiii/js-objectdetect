@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Pilih Baju</title>
+	<title>Pilih Baju (FF)</title>
 	
 	<script src="js/compatibility.js"></script>
 	<script src="js/smoother.js"></script>
@@ -33,7 +33,7 @@
 <body xonload="listProduct();">
 	<!-- <video id="video" style="float: right; margin-right: 1em;"></video> -->
 	<video id="video" style="float:right; margin-right: 1em;"></video>
-	<!-- <button id="fullscreenbtn"> full Screen </button> -->
+	<button id="fullscreenbtn" style="width:40px;height:30px;color:white;background-color:red"> Full </button>
 	<!-- <video id="video2" style="float: left; margin-right: 1em;"></video> -->
 <!-- 	<svg width="400" height="180">
 		<rect x="50" y="20" rx="10" ry="10" width="80" height="80" zstyle="fill:red;stroke:black;stroke-width:5;opacity:0.5" />

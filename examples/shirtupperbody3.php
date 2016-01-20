@@ -12,7 +12,7 @@
 
 	<script src="js/js-objectdetect/objectdetect.js"></script>
 	<script src="js/js-objectdetect/objectdetect.upperbody.js">  </script> 
-	<script src="js/shirtupperbody.js"></script>
+	<script src="js/shirtupperbody3.js"></script>
 	<script src="js/jquery.js"></script>
 </head>
 
@@ -33,13 +33,18 @@
 		<!-- coord 3 : <span id="coord3Info" align="center" style="width:10px;background-color:xxred;color:xwhite;">...</span><br> -->
 		<hr>
 		<!-- height : <span id="heightInfo" align="center" style="width:10px;background-color:xxred;color:xwhite;">...</span><br> -->
-		width : <span id="widthInfo" align="center" style="width:10px;background-color:xxred;color:xwhite;">...</span><br>
+		width (Real Time) : <span id="widthInfoRT" align="center" style="font-size:40px;width:10px;background-color:xxred;color:xwhite;">...</span><br>
+		width (Average) : <span id="widthInfoT" align="center" style="font-size:40px;width:10px;background-color:xxred;color:xwhite;">...</span><br>
 		<hr>
+		<ul id="sizeList" style="list-style:none;font-size:30px;"></ul>	
 	</div>
+
+	<!-- size -->
+		<div>Size (Real Time):</div>
+		 	<h1 id="sizeInfoRT" align="center" style="height:50px;width:100px;padding:2px 2px 2px 2px;margin:2px;background-color:red;color:white;">....</h1>
+		<div>Size (Average):</div>
+		 	<h1 id="sizeInfoT" align="center" style="height:50px;width:100px;padding:2px 2px 2px 2px;margin:2px;background-color:red;color:white;">....</h1>
 	
-	<br>
-	<div>Size:</div>
- 	<h1 id="sizeInfo" align="center" style="height:50px;width:100px;padding:2px 2px 2px 2px;margin:2px;background-color:red;color:white;">....</h1>
 	<!-- <canvas></canvas> -->
 	<div id="list">
 		<?php 

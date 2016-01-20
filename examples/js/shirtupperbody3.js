@@ -1,17 +1,27 @@
 /*old version : face */
 var sizeArr =[
-		{label:"S",min:140,max:160},
-		{label:"M",min:150,max:170},
-		{label:"L",min:160,max:180},
-		{label:"XL",min:170,max:190},
-		{label:"XXL",min:200,max:190},
+		{label:"S",min:320,max:349},
+		{label:"M",min:350,max:379},
+		{label:"L",min:380,max:409},
+		{label:"XL",min:410,max:439},
+		{label:"XXL",min:440,max:469},
+			// {label:"S",min:140,max:160},
+			// {label:"M",min:150,max:170},
+			// {label:"L",min:160,max:180},
+			// {label:"XL",min:170,max:190},
+			// {label:"XXL",min:200,max:190},
 		// {label:"S",min:39,max:40},
 		// {label:"M",min:41,max:42},
 		// {label:"L",min:43,max:44},
-	],
-	labelx='...';
+	],sizeLabelRT=sizeLabelT='...',
+	iCapture=0,
+	captureWidth=0,
+	iTest=10; 
+
 window.onload = function() {
+	sizeList();
 	var detectLib = objectdetect.upperbody;
+
 	// listProduct();
 	// cek compatibility with browser
 	var smoother = new Smoother([0.9999999, 0.9999999, 0.999, 0.999], [0, 0, 0, 0]),
@@ -46,8 +56,7 @@ window.onload = function() {
 	}
 
 	function preparation () {
-		
-		console.log('masuk');
+		// console.log('masuk');
 	}
 
 	// drawThumbnail();
@@ -80,39 +89,46 @@ window.onload = function() {
       		
       		// Perform the actual detection:
 			var coords = detector.detect(video, 1); // objectdetect.js line 684
-			console.log(typeof (coords[0])); 		// object
-			console.log(coords[0]);		 			// [45.09428000000002, 20.93663000000001, 32.210200000000015, 32.210200000000015, 1]
+			// console.log(typeof (coords[0])); 		// object
+			// console.log(coords[0]);		 			// [45.09428000000002, 20.93663000000001, 32.210200000000015, 32.210200000000015, 1]
  			
  			if (coords[0]) {
 				var coord = coords[0];
 				coord     = smoother.smooth(coord);
 				// Rescale coordinates from detector to video coordinate space:
-					coord[0] *= video.videoWidth / detector.canvas.width;
-					coord[1] *= video.videoHeight / detector.canvas.height;
-					// coord[1] *= (video.videoHeight / detector.canvas.height)+3;
-					coord[2] *= video.videoWidth / detector.canvas.width;
-					// coord[2] *= (video.videoWidth / detector.canvas.width)+1.5;
-					coord[3] *= (video.videoHeight / detector.canvas.height);
-					coord[0] *= video.videoWidth / detector.canvas.width;
-						console.log('c[0]='+coord[0]);
-						console.log('l vid='+video.videoWidth);
-						console.log('l can='+detector.canvas.width);
-					coord[1] *= video.videoHeight / detector.canvas.height;
-					coord[2] *= video.videoWidth / detector.canvas.width;
-					coord[3] *= video.videoHeight / detector.canvas.height;
+					coord[0] *= video.videoWidth / detector.canvas.width;		// x
+					coord[1] *= video.videoHeight / detector.canvas.height;		// y
+					coord[2] *= video.videoWidth / detector.canvas.width;		// width
+					coord[3] *= (video.videoHeight / detector.canvas.height);	// height
+
+						// console.log('c[0]='+coord[0]);
+						// console.log('l vid='+video.videoWidth);
+						// console.log('l can='+detector.canvas.width);
 
 					// Display shirt overlay: 
-					shirt.style.left    = ~~(coord[0] + coord[2] * 1.0/8 + video.offsetLeft) + 'px';
-					shirt.style.top     = ~~(coord[1] + coord[3] * 0.8/8 + video.offsetTop) + 'px';
-					shirt.style.width   = ~~(coord[2] * 6/8) + 'px';
-					shirt.style.height  = ~~(coord[3] * 6/8) + 'px';
+						// shirt.style.left    = ~~(coord[0] + coord[2] * 1.0/8 + video.offsetLeft) + 'px';
+						// shirt.style.top     = ~~(coord[1] + coord[3] * 0.8/8 + video.offsetTop) + 'px';
+						// shirt.style.width   = ~~(coord[2] * 6/8) + 'px';
+						// shirt.style.height  = ~~(coord[3] * 6/8) + 'px';
+					
+					//( original ) Display shirt overlay: 
+					// shirt.style.left    = ~~(coord[0] + coord[2] * 1.0/8 + video.offsetLeft) + 'px';
+					// shirt.style.top     = ~~(coord[1] + coord[3] * 0.8/8 + video.offsetTop) + 'px';
+					// shirt.style.width   = ~~(coord[2] * 6/8) + 'px';
+					// shirt.style.height  = ~~(coord[3] * 6/8) + 'px';
+						shirt.style.left    = ~~(coord[0] + coord[2] * 1.0/8 + video.offsetLeft) + 'px';
+						shirt.style.top     = ~~(coord[1] + coord[3] * 0.8/1.3 + video.offsetTop) + 'px';
+						shirt.style.width   = ~~(coord[2] * 6.3/8) + 'px';
+						shirt.style.height  = ~~(coord[3] * 8/8) + 'px';
+						// shirt.style.height  = ~~(coord[3] * 6.5/8) + 'px';
 
-						console.log('s left='+shirt.style.left);
-						console.log('s top='+shirt.style.top);
-						console.log('s width='+shirt.style.width);
-						console.log('s height='+shirt.style.height);
+						// console.log('s left='+shirt.style.left);
+						// console.log('s top='+shirt.style.top);
+						// console.log('s width='+shirt.style.width);
+						// console.log('s height='+shirt.style.height);
 
 					shirt.style.opacity = 1;
+					shirt.style.zIndex =2147483647;
 
 					var l1 = coord[0]; 
 					var l2 = coord[2]; 
@@ -128,26 +144,13 @@ window.onload = function() {
 				$('#coord1Info').html(coord[1].toFixed(2));
 				
 				var w = coord[2].toFixed(2);
-				for (var i =0; i <=sizeArr.length-1; i++) {
-					// ll+=sizeArr[i].label;
-					if(w>=sizeArr[i].min && w<=sizeArr[i].max) labelx=sizeArr[i].label;
-				};
-				// console.log(ll);
-				// return false;
-
-				$('#widthInfo').html(w);
-				$('#sizeInfo').html(labelx);
-					//l1=242.5799798077664, l2=165.52975404622956, lebar=77.05022576153684
-					// shirt.style.left    = ~~(coord[0] + coord[2] * 1.0/8 + video.offsetLeft) + 'px';
-					// shirt.style.top     = ~~(coord[1] + coord[3] * 0.8/8 + video.offsetTop) + 'px';
-					// shirt.style.width   = ~~(coord[2] * 6/8) + 'px';
-					// shirt.style.height  = ~~(coord[3] * 6/8) + 'px';
-					
-					shirt.style.opacity = 1;
-					shirt.style.zIndex =2147483647;
+				// labelSize(w);
+				// captureCollect(w);
+				iCapture++;
+				calculation(w);
 			} else { 
-				var opacity = shirt.style.opacity - 0.2;
-				shirt.style.opacity = opacity > 0 ? opacity : 0;
+				// var opacity = shirt.style.opacity - 0.2;
+				// shirt.style.opacity = opacity > 0 ? opacity : 0;
 			}
 		}
 	}
@@ -182,6 +185,7 @@ function listProduct () {
 		}
 	});
 }
+
 function toggleFullScreen(){
 	if(video.requestFullScreen){
 		video.requestFullScreen();
@@ -200,4 +204,60 @@ function drawThumbnail () {
 	imgx.onload = function(){
 	     canvas2.drawImage(imgx, 78, 19);
 	}
+}
+
+// calculation  
+	function calculation(captWidth) {
+		captureWidth+=parseFloat(captWidth);
+		if(iCapture<iTest){ // less than 10x
+			widthRealTime(parseFloat(captWidth).toFixed());
+			sizeRealTime(convertLabel(captWidth));
+			console.log(iCapture+' w kurang : '+captureWidth);
+		}else{ // when 10
+			var avgWidth=(parseFloat(captureWidth)/iTest).toFixed();
+			sizeTruly(convertLabel(avgWidth));
+			widthTruly(avgWidth);
+			captureWidth=0;
+			iCapture=0;
+		}
+	}
+
+// width info
+	function widthRealTime (widthRT) {$('#widthInfoRT').html(widthRT);}
+	function widthTruly (widthT) {$('#widthInfoT').html(widthT);}
+
+// size info 
+	function sizeRealTime (sizeRT) {$('#sizeInfoRT').html(sizeRT);}
+	function sizeTruly (sizeT) {console.log(sizeT);$('#sizeInfoT').html(sizeT);}
+
+function sizeList () {
+	var li='';
+	$.each(sizeArr,function  (id,item) {
+		li+='<li>'+item.label+' ('+item.min+' - '+item.max+')</li>';
+	});$('#sizeList').html(li);
+}
+	
+function convertLabel (objWidth) {
+	var sl='';
+	for (var j =0; j <=sizeArr.length-1; j++) {
+		var minWidth= parseFloat(sizeArr[j].min);
+		var maxWidth= parseFloat(sizeArr[j].max);
+		if(objWidth>=minWidth && objWidth<=maxWidth) sl=sizeArr[j].label;
+	}return sl==''?'<small>sorry</small> :(':sl;
+}
+
+/*useless */
+function labelSize(avgW){
+	console.log('labels  avgW ..='+avgW);
+	var objWidth=parseFloat(avgW);
+	for (var j =0; j <=sizeArr.length-1; j++) {
+		var minWidth= parseFloat(sizeArr[j].min);
+		var maxWidth= parseFloat(sizeArr[j].max);
+		if(objWidth>=minWidth && objWidth<=maxWidth) labelx=sizeArr[j].label;
+	}
+	sizeTruly(labelx);
+}
+function calculateRT (captureWidth) {
+	widthRealTime();
+	sizeRealTime();
 }

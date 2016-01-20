@@ -1,39 +1,15 @@
 /*old version : face */
-
-// var sizeShirt=function  (w,h) {
-// 	this.lbr=w; 
-// 	this.tgi=t;
-
-// 	convertSize = function (lbr,tgi) {
-// 		var xx = [{
-// 			"min":39,
-// 			"max":40,
-// 			"label":"S"
-// 		},{
-// 			"min":41,
-// 			"max":42,
-// 			"label":"M"
-// 		},{
-// 			"min":43,
-// 			"max":44,
-// 			"label":"L"
-// 		},{
-// 			"min":45,
-// 			"max":46,
-// 			"label":"XL"
-// 		}];
-// 	}return lbr; 
-// }
-
 var sizeArr =[
-	{label:"S",min:140,max:160},
-	{label:"M",min:150,max:170},
-	{label:"L",min:160,max:180},
-	{label:"XL",min:170,max:190},
-	// {label:"S",min:39,max:40},
-	// {label:"M",min:41,max:42},
-	// {label:"L",min:43,max:44},
-];
+		{label:"S",min:140,max:160},
+		{label:"M",min:150,max:170},
+		{label:"L",min:160,max:180},
+		{label:"XL",min:170,max:190},
+		{label:"XXL",min:200,max:190},
+		// {label:"S",min:39,max:40},
+		// {label:"M",min:41,max:42},
+		// {label:"L",min:43,max:44},
+	],
+	labelx='...';
 window.onload = function() {
 	// var detectLib = objectdetect.upperbody;
 	var detectLib = objectdetect.frontalface_alt;
@@ -147,26 +123,19 @@ window.onload = function() {
 					var tinggi =Math.abs(t2-t1); 
 					// alert('t1='+t1+' t2='+t2+' tinggi='+tinggi);
 					
-			// alert(sizeArr[0].min);
-				// $('#heightInfo').html(sizeArr[0].label);
 				$('#coord0Info').html(coord[0].toFixed(2));
 				$('#coord1Info').html(coord[1].toFixed(2));
 				
 				var w = coord[2].toFixed(2);
 				for (var i =0; i <=sizeArr.length-1; i++) {
-					if(w>sizeArr[i].min && w<sizeArr[i].max) labelx=sizeArr[i].label;
+					// ll+=sizeArr[i].label;
+					if(w>=sizeArr[i].min && w<=sizeArr[i].max) labelx=sizeArr[i].label;
 				};
+				// console.log(ll);
+				// return false;
+
 				$('#widthInfo').html(w);
 				$('#sizeInfo').html(labelx);
-				// var h = coord[2].toFixed(2);
-				// $('#heightInfo').html(coord[3].toFixed(2));
-				
-				// $('#heightInfo').html(tinggi.toFixed(2));
-				// $('#widthInfo').html(lebar.toFixed(2));
-				// $('#sizeInfo').html(sizeArr[0].label);
-						// l1=261.0326599616531 l2=174.3476111632184 lebar=86.6850487984347
-						// t1=120.64716048326324 t2=174.3476111632184 tinggi=53.70045067995517
-
 					//l1=242.5799798077664, l2=165.52975404622956, lebar=77.05022576153684
 					// shirt.style.left    = ~~(coord[0] + coord[2] * 1.0/8 + video.offsetLeft) + 'px';
 					// shirt.style.top     = ~~(coord[1] + coord[3] * 0.8/8 + video.offsetTop) + 'px';
